@@ -79,7 +79,10 @@ find_package(CUnit 2.1)
 enable_testing()
 set(HAVE_CUNIT      ${CUNIT_FOUND})
 if(HAVE_CUNIT)
-  add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND})
+  get_directory_property(PARENT_PROJECT_DIR PARENT_DIRECTORY)
+  if(NOT PARENT_PROJECT_DIR) # We are the top-level project
+    add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND})
+  endif()
 endif()
 
 # OpenSSL (required for libngtcp2_crypto_openssl and examples)

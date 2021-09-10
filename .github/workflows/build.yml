@@ -11,6 +11,7 @@ jobs:
         os: [ubuntu-20.04, macos-10.15]
         compiler: [gcc, clang]
         buildtool: [autotools, cmake]
+        openssl: [openssl1, openssl3]
 
     steps:
     - uses: actions/checkout@v2
@@ -49,9 +50,14 @@ jobs:
       run: |
         echo 'CC=gcc-10' >> $GITHUB_ENV
         echo 'CXX=g++-10' >> $GITHUB_ENV
-    - name: Build OpenSSL
+    - name: Build OpenSSL v1.1.1
+      if: runner.openssl == 'openssl1'
       run: |
-        ./ci/build_openssl.sh
+        ./ci/build_openssl1.sh
+    - name: Build OpenSSL v3.0.0
+      if: runner.openssl == 'openssl3'
+      run: |
+        ./ci/build_openssl3.sh
     - name: Build GnuTLS
       run: |
         ./ci/build_gnutls.sh

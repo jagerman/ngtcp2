@@ -53,7 +53,7 @@ Build from git
    $ git clone --depth 1 -b OpenSSL_1_1_1l+quic https://github.com/quictls/openssl
    $ cd openssl
    $ # For Linux
-   $ ./config enable-tls1_3 --prefix=$PWD/build
+   $ ./config enable-tls1_3 --prefix=$PWD/build --libdir=$PWD/build/lib
    $ make -j$(nproc)
    $ make install_sw
    $ cd ..

@@ -51,11 +51,11 @@ jobs:
         echo 'CC=gcc-10' >> $GITHUB_ENV
         echo 'CXX=g++-10' >> $GITHUB_ENV
     - name: Build OpenSSL v1.1.1
-      if: runner.openssl == 'openssl1'
+      if: matrix.openssl == 'openssl1'
       run: |
         ./ci/build_openssl1.sh
     - name: Build OpenSSL v3.0.0
-      if: runner.openssl == 'openssl3'
+      if: matrix.openssl == 'openssl3'
       run: |
         ./ci/build_openssl3.sh
     - name: Build GnuTLS

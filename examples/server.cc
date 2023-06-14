@@ -2023,7 +2023,7 @@ void Handler::update_timer() {
   auto expiry = ngtcp2_conn_get_expiry(conn_);
   auto now = util::timestamp();
 
-  if (expiry <= now) {
+  if (false && expiry <= now) {
     if (!config.quiet) {
       auto t = static_cast<ev_tstamp>(now - expiry) / NGTCP2_SECONDS;
       std::cerr << "Timer has already expired: " << std::fixed << t << "s"
@@ -2035,7 +2035,7 @@ void Handler::update_timer() {
     return;
   }
 
-  auto t = static_cast<ev_tstamp>(expiry - now) / NGTCP2_SECONDS;
+  auto t = std::max(0.001, static_cast<ev_tstamp>(expiry < now ? 0 : expiry - now) / NGTCP2_SECONDS);
   if (!config.quiet) {
     std::cerr << "Set timer=" << std::fixed << t << "s" << std::defaultfloat
               << std::endl;

@@ -504,6 +504,7 @@ int Stream::start_response(nghttp3_conn *httpconn) {
       pri.inc = req.pri.inc;
     }
 
+    /*
     if (auto rv =
             nghttp3_conn_set_server_stream_priority(httpconn, stream_id, &pri);
         rv != 0) {
@@ -511,6 +512,7 @@ int Stream::start_response(nghttp3_conn *httpconn) {
                 << std::endl;
       return -1;
     }
+    */
 
     prival = "u=";
     prival += pri.urgency + '0';
